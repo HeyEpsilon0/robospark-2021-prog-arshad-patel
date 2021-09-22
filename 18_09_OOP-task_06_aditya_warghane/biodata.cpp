@@ -10,7 +10,7 @@ class  personal_data{                                       //class for personal
     string name,surname,mob;
     int year,month,date;
     bool notValid=true;
-
+    
     public:
     personal_data(){
         name="Aditya";
@@ -65,19 +65,11 @@ bool isDateValid(int date, int month, int year){            //function to check 
 }    
 
     void getper(){                                              //function to get personal data AND VALID BIRTH DATE
-        int new;
         cout<<"Enter personal data"<<endl;
         cout<<"Enter Name : ";
         cin >>name;
         cout<<"Enter Surname : ";
         cin>>surname;
-        cout<<"Enter Mob : ";
-        cin>>mob;
-        cout<<"Enter year";
-        cin>>year;
-        new=isyearvalid(year);
-        if(new==0){
-            
         
         while(notValid){
         cout<<"Please Enter Valid Birth Date!"<<endl;
@@ -89,13 +81,9 @@ bool isDateValid(int date, int month, int year){            //function to check 
         cin>>date;
         if(isYearValid(year) && isMonthValid(month,year) && isDateValid(date,month,year)) notValid=false;
         }
-        }
-        else{
-            cout<<"Enter month";
-            cin>>month;
-            cout<<"enter date";
-            cin>>date;
-        }
+        notValid=true;
+        cout<<"Enter Mob : ";
+        cin>>mob;
     }
     
     void dis_per()                                              //func to display personal data
@@ -235,5 +223,6 @@ int main()
     
     return 0;
 }
+
 
 
