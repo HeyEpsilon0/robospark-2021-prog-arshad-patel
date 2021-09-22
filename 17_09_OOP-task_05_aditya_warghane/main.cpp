@@ -9,10 +9,10 @@ Write your code in this editor and press "Run" button to compile and execute it.
 #include <iostream>
 
 using namespace std;
-class Rectangle{
+class Rectangle{                                //declare class Rectangle
     int l,b;
     public:
-    Rectangle(){
+    Rectangle(){                                //with default,Parametric(1 and 2 parameters)
         l=0;
         b=0;
     }
@@ -25,11 +25,11 @@ class Rectangle{
         b=x;
     }
     
-    void area(){
+    void area(){                                //func to calculate area
         cout<<"Area is :"<<l*b<<endl;
     }
 };
-void para2(){
+void para2(){                                   //func to get dimensions for 2 parameters
     int x,y;
     cout<<"Enter 2 parameters\n";
     cin>>x;
@@ -37,7 +37,7 @@ void para2(){
     Rectangle obj1(x,y);
     obj1.area();
 }
-void para1(){
+void para1(){                                   //func to get dimensions for 1 parameter
     int x;
     cout<<"Enter 1 parameter\n";
     cin>>x;
@@ -48,14 +48,14 @@ void para1(){
 int main()
 {   
     int key;
-    while(key!=0){
+    while(key!=0){                              //ask user to enter key and which constructor to use.
     cout<<"Choose constructor\n1.Default.\n2.Parametric with 2 parameters\n3.Parametric with 1 parameter1\n0.Exit"<<endl;
     cin>>key;
     Rectangle obj;
 
     
     
-    switch(key){
+    switch(key){                                //call the required functions
         case 1:
         obj.area();
         break;
