@@ -1,55 +1,124 @@
 #include <iostream>
-
+#define CURRENTYEAR 2021                                    //defined current date 20/9/21
+#define CURRENTMONTH 9
+#define CURRENTDATE 20
 using namespace std;
 
 
-class  personal_data{
+class  personal_data{                                       //class for personal data
     protected:
-    string name,surname;
-    int dob,mob;
-    
+    string name,surname,mob;
+    int year,month,date;
+    bool notValid=true;
+
     public:
     personal_data(){
         name="Aditya";
         surname="Warghane";
-        dob=782;
-        mob=7841;
+        year=2002;
+        month=8;
+        date=7;
+        mob="7841098134";
     }
-    void getper(){
+bool isYearValid(int year){                                 //func to check if year entered if valid (<=2021)
+    return (year<=CURRENTYEAR && year>0);
+}
+
+bool isMonthValid(int month, int year){                     //func to check if month is valid or not(year==2021 month<10)
+    if(month>12 || month<1) return false;
+    if(year<CURRENTYEAR) return true;
+    if(year==CURRENTYEAR && month<=CURRENTMONTH) return true;
+    return false;
+}
+
+bool is31(int month){                                       //func to check if month has 31 days or not
+    if(month==1 || month==3 || month==5 || month==7 || month==8 || month==10 || month==12) return true;
+    return false;
+}
+
+bool isLeap(int year){                                      //func to check if entered year is isLeap or not
+    if (year % 400 == 0) {
+        return true;
+    }
+    else if (year % 100 == 0) {
+        return false;
+    }
+    else if (year % 4 == 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool isDateValid(int date, int month, int year){            //function to check if date is VALID or not
+    if(year==CURRENTYEAR && month==CURRENTMONTH && is31(month) && date<=CURRENTDATE && date>0) return true;
+    if(year==CURRENTYEAR && month==CURRENTMONTH && !is31(month) && date<=CURRENTDATE && date>0) return true;
+    if(year==CURRENTYEAR && month<CURRENTMONTH && month!=2 && is31(month) && date<=31 && date>0) return true;
+    if(year==CURRENTYEAR && month<CURRENTMONTH && month!=2 && !is31(month) && date<=30 && date>0) return true;
+    if(year==CURRENTYEAR && month==2 &&  date<=28 && date>0) return true;
+    if(year<CURRENTYEAR && month!=2 &&  is31(month) && date<=31 && date>0) return true;
+    if(year<CURRENTYEAR && month!=2 &&  !is31(month) && date<=30 && date>0) return true;
+    if(year<CURRENTYEAR && month==2 && isLeap(year) && date<=29 && date>0) return true;
+    if(year<CURRENTYEAR && month==2 && !isLeap(year) && date<=28 && date>0) return true;
+    return false;
+}    
+
+    void getper(){                                              //function to get personal data AND VALID BIRTH DATE
+        int new;
         cout<<"Enter personal data"<<endl;
         cout<<"Enter Name : ";
         cin >>name;
         cout<<"Enter Surname : ";
         cin>>surname;
-        cout<<"Enter DoB : ";
-        cin>>dob;
         cout<<"Enter Mob : ";
         cin>>mob;
+        cout<<"Enter year";
+        cin>>year;
+        new=isyearvalid(year);
+        if(new==0){
+            
+        
+        while(notValid){
+        cout<<"Please Enter Valid Birth Date!"<<endl;
+        cout<<"Enter year"<<endl;
+        cin>>year;
+        cout<<"Enter month"<<endl;
+        cin>>month;
+        cout<<"Enter date"<<endl;
+        cin>>date;
+        if(isYearValid(year) && isMonthValid(month,year) && isDateValid(date,month,year)) notValid=false;
+        }
+        }
+        else{
+            cout<<"Enter month";
+            cin>>month;
+            cout<<"enter date";
+            cin>>date;
+        }
     }
     
-    void dis_per()
+    void dis_per()                                              //func to display personal data
     {   cout<<"*************************************\n";
         cout<<"Name: "<<name<<" "<<surname<<endl;
-        cout<<"DoB: "<<dob<<endl;
+        cout<<"Dob:"<<date<<"/"<<month<<"/"<<year<<endl;
         cout<<"Mob: "<<mob<<endl;
         cout<<"*************************************\n";
     }
     
 };
 
-
-
-class professional_data{
+class professional_data{                                        //declared professional_data class
     protected:
     string company,title,project;
     
     public:
-    professional_data(){
+    professional_data(){                                        //def constructor
         company="DE";
         title="CEO";
         project="WF";
     }
-    void getpro(){
+    void getpro(){                                              //func to get professional_data
         cout<<"Enter professional data"<<endl;
         cout<<"Enter Company: ";
         cin >>company;
@@ -59,7 +128,7 @@ class professional_data{
         cin>>project;
     }
     
-    void dis_pro(){
+    void dis_pro(){                                             //func to show professional_data
         cout<<"*************************************\n";
         cout<<"Company : "<<company<<endl;
         cout<<"Title : "<<title<<endl;
@@ -68,7 +137,7 @@ class professional_data{
     }
 };
 
-class academic_data{
+class academic_data{                                            //declared academic_data class
     protected:
     string clg,branch;
     int pass;
@@ -81,7 +150,7 @@ class academic_data{
             pass=2024;
             cgpa=10.1;
         }
-        void getacad(){
+        void getacad(){                                         //func to get academic_data
         cout<<"Fill academic data"<<endl;
         cout<<"Enter College: ";
         cin >>clg;
@@ -93,7 +162,7 @@ class academic_data{
         cin>>cgpa;
     }
     
-    void dis_acad()
+    void dis_acad()                                             //func to show academic_data
     {
         cout<<"*************************************\n";
         cout<<"College Name: "<<clg<<endl;
@@ -108,13 +177,13 @@ class academic_data{
     
 
 class biodata : public personal_data,public professional_data,public academic_data
-{
+{                                                               //declared biodata class
     public:
-    void dis_bio()
+    void dis_bio()                                              //function to display biodata
     {   
         cout<<"*************************************\n";
         cout<<"Name: "<<name<<" "<<surname<<endl;
-        cout<<"DoB: "<<dob<<endl;
+        cout<<"Dob:"<<date<<"/"<<month<<"/"<<year<<endl;
         cout<<"Mob: "<<mob<<endl; 
         cout<<"Company : "<<company<<endl;
         cout<<"Title : "<<title<<endl;
@@ -130,17 +199,17 @@ int main()
 {
     int key=10;
     cout<<"                    FILL THE REQUIRED DATA!\n";
-    biodata bio;
+    biodata bio;                                                //made obj of biodata
     
     while(key!=0)
     {
         cout<<"1. Fill personal data\n2. Fill professional data\n3. Fill academic data\n4. View personal data\n5. View professional data\n6. View academic data\n9. View Biodata\n0. Exit\n";
         cin>>key;
         
-        switch(key){
+        switch(key){                                    
             case 1:
-            bio.getper();
-            break;
+            bio.getper();                                       //biodata can use functions of parent class as they were declared protected
+            break;                                              
             case 2:
             bio.getpro();
             break;
@@ -166,3 +235,5 @@ int main()
     
     return 0;
 }
+
+
