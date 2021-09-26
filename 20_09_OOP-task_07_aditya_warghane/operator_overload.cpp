@@ -3,10 +3,10 @@
 using namespace std;
 
 class box{
-    int length, breadth, height;
+    int length, breadth, height;                        //declared class with attributes                            
     
     public:
-    void get_dim(){
+    void get_dim(){                                     //func to get dimensions
         cout <<"Enter length"<<endl;
         cin >>length ;
         cout <<"Enter breadth"<<endl;
@@ -15,16 +15,16 @@ class box{
         cin >>height ;        
     }
     
-    void show_dim(){
+    void show_dim(){                                    //func to print dimensions
         cout<<"Length is : "<<length<<endl;
         cout<<"Breadth is : "<<breadth<<endl;
         cout<<"Height is : "<<height<<"\n"<<endl;
     }
     
-    int get_vol(){
+    int get_vol(){                                      //fuction to return volume
        return length*breadth*height;
     }
-    int operator>(box obj){
+    int operator>(box obj){                             //function for box objects. will return 1(true) if vol(a)>vol(b) else 0(false)
         
         if(get_vol()>obj.get_vol()){
             return 1;
@@ -33,7 +33,7 @@ class box{
             return 0;
         }
     }
-    int operator>=(box obj){
+    int operator>=(box obj){                            //function for box objects. will return 1(true) if vol(a)>=vol(b) else 0(false)
         
         if(get_vol()>=obj.get_vol()){
             return 1;
@@ -42,7 +42,7 @@ class box{
             return 0;
         }
     }
-    int operator<=(box obj){
+    int operator<=(box obj){                            //function for box objects. will return 1(true) if vol(a)<=vol(b) else 0(false)
         
         if(get_vol()<obj.get_vol()){
             return 1;
@@ -51,7 +51,7 @@ class box{
             return 0;
         }
     }
-        int operator<(box obj){
+        int operator<(box obj){                         //function for box objects. will return 1(true) if vol(a)<vol(b) else 0(false)
         
         if(get_vol()<=obj.get_vol()){
             return 1;
@@ -60,7 +60,7 @@ class box{
             return 0;
         }
     }
-        int operator==(box obj){
+        int operator==(box obj){                        //function for box objects. will return 1(true) if vol(a)=vol(b) else 0(false)
         
         if(get_vol()==obj.get_vol()){
             return 1;
@@ -69,7 +69,7 @@ class box{
             return 0;
         }
     }
-        int operator!=(box obj){
+        int operator!=(box obj){                        //function for box objects. will return 1(true) if vol(a)!=vol(b) else 0(false)
         
         if(get_vol()!=obj.get_vol()){
             return 1;
@@ -82,8 +82,8 @@ class box{
 };
 int main()
 {   int key=10;
-    box one, two;
-    cout<<"For box 1: "<<endl;
+    box one, two;                                       //made 2 obj and got their dimensions and displayed them
+    cout<<"For box 1: "<<endl;                                  
     one.get_dim();
     cout<<"For box 2: "<<endl;
     two.get_dim();
@@ -92,17 +92,17 @@ int main()
     cout<<"For box 2: "<<endl;
     two.show_dim();
     
-    cout<<"Volume of box one: "<<one.get_vol()<<endl;
+    cout<<"Volume of box one: "<<one.get_vol()<<endl;  //displayed the volumes so that user wont forget
     cout<<"Volume of box two: "<<two.get_vol()<<endl;
     
-    while(key!=0)
+    while(key!=0)                                      //using overloaded operators in switch by taking options from user till 0 is entered
     {
         cout<<"\n Choose an operator to compare the volumes of box one and two (Volume of box one _____Volume of box two)\noptions:\n 1. >\t2. <\n3. >=\t4. <=\n5. ==\t6. !=\n";
         cin>>key;
         switch(key)
         {
-            case 1:
-                if(one.get_vol()>two.get_vol())
+            case 1:                                                             
+                if(one.get_vol()>two.get_vol())                                 //calling the operator in if() and printing appropriate messages
                 {
                     cout<<"Volume of box one ie. "<<one.get_vol()<<" is greater"<<endl;
                 }
@@ -169,7 +169,7 @@ int main()
                     cout<<"Volumes are equal!";
                 }
                 break;
-            case 0:
+            case 0:                                                             //Exit program only when input is 0
                 exit(0);
             default:
                 cout<<"Invalid option";
@@ -181,3 +181,4 @@ int main()
     return 0;
     
 }
+
